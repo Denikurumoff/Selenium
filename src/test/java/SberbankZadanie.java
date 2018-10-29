@@ -3,6 +3,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,6 +31,9 @@ public class SberbankZadanie {
 
     @Test
     public void testBank() throws InterruptedException {
+        Thread.sleep(1000);
+        ((JavascriptExecutor)driver).executeScript("scroll(0,4400)");
+        Thread.sleep(1000);
         driver.findElement(By.xpath("//*[@id=\"main\"]/div[3]/div/div/div/div/div/div[1]/div/div[5]/div[3]/a")).click(); // 2. Нажать на – Страхование
 
         Wait<WebDriver> wait = new WebDriverWait(driver, 5, 2000);
@@ -56,7 +60,7 @@ public class SberbankZadanie {
         fillField(By.xpath("//*[@id=\"views\"]/section/form/section/section[1]/div/insured-input/div/fieldset[3]/div/input"), "DENI");
         fillField(By.name("insured0_birthDate"), "19.06.1992");
 
- // вводим данные страхователя
+        // вводим данные страхователя
         fillField(By.name("surname"), "Страхователева");
         fillField(By.name("name"), "Страхиня");
         fillField(By.name("middlename"), "Страховна");
@@ -101,46 +105,14 @@ public class SberbankZadanie {
 
 
 
-  /*
-
-            driver.findElement(By.xpath("//*[@id=\"rgs-main-menu-insurance-dropdown\"]/div[1]/div[1]/div/div[1]/div[3]/ul/li[2]/a")).click();
-
-
-
-
-            Assert.assertEquals("Заявка на добровольное медицинское страхование", title.getText());
-
-            fillField(By.name("LastName"), "Иванов");
-            fillField(By.name("FirstName"), "Иван");
-            fillField(By.name("MiddleName"), "Иванович");
-            driver.findElement(By.xpath("//*[@id=\"applicationForm\"]/div[2]/div[9]/label/input")).click();
-            new Select(driver.findElement(By.name("Region"))).selectByVisibleText("Москва");
-            fillField(By.name("Comment"), "Autotest");
-
-            fillField(By.name("Email"), "123445");
-            driver.findElement(By.xpath("//*[@id=\"button-m\"]")).click();
-            WebElement error = driver.findElement(By.xpath("//*[@id=\"applicationForm\"]/div[2]/div[6]/div/label/span"));
-            Assert.assertEquals("Введите адрес электронной почты",
-                    driver.findElement(By.xpath("//*[text()='Эл. почта']/..//*[@class='validation-error']")).getText());
-
-        }
-
-        public void fillField (By locator, String value){
-            driver.findElement(locator).clear();
-            driver.findElement(locator).sendKeys(value);
-        }
-
-        @After
-        public void afterTest () {
-            driver.quit();
-
-        }
-    }*/
-
     }
     public void fillField (By locator, String value){
         driver.findElement(locator).clear();
         driver.findElement(locator).sendKeys(value);
+    }
+    @After
+    public void afterTest () {
+        driver.quit();
     }
 
 
